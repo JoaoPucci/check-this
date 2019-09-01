@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">Check This</string>
+    <string name="event_detail_image_content_description">descriptive picture</string>
+    <string name="event_detail_label_description">Description</string>
+    <string name="event_detail_label_location">Location</string>
+    <string name="google_android_map_api_key">AIzaSyDSOcc84nWn1gy-fucEa-z2jSegICFiXC0</string>
+    <string name="event_detail_label_people">Who\'s checking</string>
+    <string name="error_check_in">Error Checking In, try again later</string>
+    <string name="success_check_in">You are checking it!</string>
+    <string name="check_in_dialog_cancel">Cancel</string>
+    <string name="check_in_dialog_title">Check this event?</string>
+    <string name="check_in_dialog_positive">Check It!</string>
 </resources>

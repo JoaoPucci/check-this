@@ -1,4 +1,6 @@
-package tech.pucci.checkthis
+package tech.pucci.checkthis.model
+
+import com.google.gson.Gson
 
 class Event(val people: List<Person>,
             val date: Long,
@@ -9,5 +11,14 @@ class Event(val people: List<Person>,
             val price: Double,
             val title: String,
             val id: String,
-            val cupons: List<Coupon>)
+            val cupons: List<Coupon>){
+
+    fun toJsonString(): String {
+        return Gson().toJson(this)
+    }
+
+    companion object{
+        const val EXTRA_EVENT = "EXTRA_EVENT"
+    }
+}
 
