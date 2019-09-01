@@ -1,15 +1,16 @@
-package tech.pucci.checkthis
+package tech.pucci.checkthis.ui.activity
 
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
+import tech.pucci.checkthis.ui.adapter.EventsAdapter
+import tech.pucci.checkthis.R
+import tech.pucci.checkthis.network.RetrofitInitializer
+import tech.pucci.checkthis.model.Event
 
 class EventsActivity : AppCompatActivity() {
 
@@ -20,22 +21,17 @@ class EventsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_events)
 
-        rvEvents = findViewById(R.id.events_activity_events_recycler_view)
+        rvEvents = findViewById(R.id.events_recycler_view)
         rvEvents.adapter = EventsAdapter(this, events)
+
+        requestEvents()
     }
 
-    override fun onResume() {
-        super.onResume()
-
-        val retrofit = Retrofit.Builder()
-            .baseUrl("http://5b840ba5db24a100142dcd8c.mockapi.io/api/")
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
-            .create(EventsApi::class.java)
-
-        retrofit.get().enqueue(object : Callback<List<Event>?> {
+    private fun requestEvents() {
+        RetrofitInitializer().eventsService().get().enqueue(object : Callback<List<Event>?> {
             override fun onFailure(call: Call<List<Event>?>, t: Throwable) {
-                Toast.makeText(this@EventsActivity, "Error receiving events", Toast.LENGTH_LONG).show()
+                Toast.makeText(this@EventsActivity, "Error receiving events", Toast.LENGTH_LONG)
+                    .show()
                 t.printStackTrace()
             }
 

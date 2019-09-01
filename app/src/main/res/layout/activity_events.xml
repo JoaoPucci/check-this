@@ -4,15 +4,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".EventsActivity">
+    android:background="@color/simple_background"
+    tools:context=".ui.activity.EventsActivity">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/events_activity_events_recycler_view"
+        android:id="@+id/events_recycler_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
         android:orientation="vertical"
+        app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
         app:spanCount="2"
-        tools:layout_editor_absoluteX="155dp"
-        tools:layout_editor_absoluteY="92dp" />
+        tools:itemCount="2"
+        tools:listitem="@layout/list_item_event"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
