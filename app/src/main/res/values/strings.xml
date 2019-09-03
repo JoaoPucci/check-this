@@ -10,5 +10,7 @@
     <string name="check_in_dialog_cancel">Cancel</string>
     <string name="check_in_dialog_title">Check this event?</string>
     <string name="check_in_dialog_positive">Check It!</string>
-    <string name="error_request_events">Error receiving events</string>
+    <string name="error_loading_event_list">Error loading items :(\nSwipe down to retry</string>
+    <string name="event_list_error_loading_content_desc">Refresh icon</string>
+    <string name="event_list_no_events">There are no events for you</string>
 </resources>
