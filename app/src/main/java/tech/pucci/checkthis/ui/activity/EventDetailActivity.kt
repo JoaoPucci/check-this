@@ -4,6 +4,7 @@ import android.Manifest
 import android.content.pm.PackageManager
 import android.location.Geocoder
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
@@ -23,6 +24,7 @@ import com.google.gson.Gson
 import com.squareup.picasso.Picasso
 import okhttp3.ResponseBody
 import retrofit2.Call
+import retrofit2.Callback
 import retrofit2.Response
 import tech.pucci.checkthis.R
 import tech.pucci.checkthis.model.Event
@@ -40,6 +42,8 @@ class EventDetailActivity : AppCompatActivity() {
     private lateinit var rvPeople: RecyclerView
     private lateinit var tvAddress: TextView
     private lateinit var fabCheckThis: FloatingActionButton
+    private lateinit var tvLabelDescription: TextView
+    private lateinit var tvDatetime: TextView
 
     private val rcGeoLocationPermission = 99
 
@@ -53,6 +57,8 @@ class EventDetailActivity : AppCompatActivity() {
         rvPeople = findViewById(R.id.people_recycler_view)
         tvAddress = findViewById(R.id.event_detail_address)
         fabCheckThis = findViewById(R.id.event_detail_check)
+        tvLabelDescription = findViewById(R.id.event_item_label_description)
+        tvDatetime = findViewById(R.id.event_item_label_datetime)
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setDisplayShowHomeEnabled(true)
@@ -75,33 +81,28 @@ class EventDetailActivity : AppCompatActivity() {
         fabCheckThis.setOnClickListener {
             AlertDialog.Builder(this).setTitle(getString(R.string.check_in_dialog_title))
                 .setPositiveButton(getString(R.string.check_in_dialog_positive)) { _, _ ->
-                    RetrofitInitializer()
-                        .eventsService()
-                        .checkIn(Person("", event.id, "Batman", "BatEmail", "BatPicture"))
-                        .enqueue(object : retrofit2.Callback<ResponseBody> {
-                            override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
-                                Toast.makeText(
-                                    this@EventDetailActivity,
-                                    getString(R.string.error_check_in),
-                                    Toast.LENGTH_LONG
-                                )
-                                    .show()
-                                t.printStackTrace()
-                            }
-
-                            override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
-                                Toast.makeText(
-                                    this@EventDetailActivity,
-                                    getString(R.string.success_check_in),
-                                    Toast.LENGTH_LONG
-                                ).show()
-                            }
-                        })
+                    checkInRequest()
                 }
                 .setNegativeButton(getString(R.string.check_in_dialog_cancel)) { dialogInterface, _ ->
                     dialogInterface.dismiss()
                 }.create().show()
         }
+    }
+
+    private fun checkInRequest() {
+        RetrofitInitializer()
+            .eventsService()
+            .checkIn(Person("", event.id, "Batman", "BatEmail", "BatPicture"))
+            .enqueue(object : Callback<ResponseBody> {
+                override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
+                    Toast.makeText(this@EventDetailActivity, getString(R.string.error_check_in), Toast.LENGTH_LONG).show()
+                    t.printStackTrace()
+                }
+
+                override fun onResponse(call: Call<ResponseBody>,response: Response<ResponseBody>) {
+                    Toast.makeText(this@EventDetailActivity,getString(R.string.success_check_in),Toast.LENGTH_LONG).show()
+                }
+            })
     }
 
     private fun configureMapIfPermitted() {
@@ -162,9 +163,15 @@ class EventDetailActivity : AppCompatActivity() {
     }
 
     private fun getAddressLine(geoLocation: LatLng): CharSequence? {
-        val geoCoder = Geocoder(this, Locale.getDefault()).getFromLocation(geoLocation.latitude, geoLocation.longitude, 1)
-        return geoCoder?.first()?.getAddressLine(0)
+        return try {
+            val geoCoder = Geocoder(this, Locale.getDefault()).getFromLocation(geoLocation.latitude, geoLocation.longitude, 1)
+            geoCoder?.first()?.getAddressLine(0)
+        } catch (e: Exception) {
+            Log.e("geolocation", "Could not get adress line")
+            e.printStackTrace()
 
+            geoLocation.latitude.toString() + "," + geoLocation.longitude.toString()
+        }
     }
 
     override fun onResume() {
@@ -175,11 +182,15 @@ class EventDetailActivity : AppCompatActivity() {
             .placeholder(R.drawable.image_placeholder)
             .into(ivImage)
 
+        tvLabelDescription.text = event.title
+        tvDatetime.text = event.formattedTime
         tvDescription.text = event.description
         rvPeople.adapter = PeopleAdapter(this, event.people)
 
         mvMap.onResume()
     }
+
+
 
     override fun onStart() {
         mvMap.onStart()

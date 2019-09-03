@@ -123,4 +123,12 @@ class EventTest {
         assertEquals(expectedJsonStringResult, event.toJsonString())
     }
 
+    @Test
+    fun should_returnFormattedDate_FromMillis() {
+        val event = Event(listOf(person1), 1534784400000, "O Patas Dadas estará na Redenção", image,
+            "-51.2146267", "-30.0392981",29.99, "Feira de adoção de animais na Redenção",
+            "1", listOf(coupon1))
+
+        assertEquals("20/08/2018 14:00:00", event.formattedTime)
+    }
 }

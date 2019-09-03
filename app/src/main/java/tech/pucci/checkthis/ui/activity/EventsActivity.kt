@@ -44,6 +44,8 @@ class EventsActivity : AppCompatActivity() {
     }
 
     private fun requestEvents() {
+        srlEvents.isRefreshing = true
+
         RetrofitInitializer().eventsService().get().enqueue(object : Callback<List<Event>?> {
             override fun onFailure(call: Call<List<Event>?>, t: Throwable) {
                 t.printStackTrace()
