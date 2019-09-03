@@ -7,14 +7,14 @@ Notas:
 - Utilizada a depencência do Gson para realizar o parse do json das requisições para objetos e também
 para facilitar a transição de objetos entre activities.
 - Utilizada a dependência do play-service-maps para utilização da API de mapas da google.
+- Api's de suporte utilizadas: constraint-layout, cardview, recycler-view.
 
 Algumas melhorias não realizadas em fator do tempo disponível:
-- Testes Unitários
 - Melhoria do design da lista de eventos.
-- Interface para o usuário entrar com seus dados pessoais e estes serem salvos nas preferências, para depois serem enviados
-no check in. (No momento está enviando um usuário estático).
 - Implementar todos os campos na tela de detalhes.
 - Dividir em fragments.
+- Implementar upload de imagem para o usuário.
+- Usar o usuário salvo nas preferências ao abrir o app e disponibilizar um botão de logout.
 - Implementar a lista e a tela de detalhes lado a lado se o tamanho de tela permitir.
 
 Muito Obrigado!
