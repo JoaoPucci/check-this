@@ -31,6 +31,7 @@ import tech.pucci.checkthis.model.Event
 import tech.pucci.checkthis.model.Person
 import tech.pucci.checkthis.network.RetrofitInitializer
 import tech.pucci.checkthis.ui.adapter.PeopleAdapter
+import tech.pucci.checkthis.util.SharedPrefsUtil
 import java.util.*
 
 class EventDetailActivity : AppCompatActivity() {
@@ -90,19 +91,24 @@ class EventDetailActivity : AppCompatActivity() {
     }
 
     private fun checkInRequest() {
-        RetrofitInitializer()
-            .eventsService()
-            .checkIn(Person("", event.id, "Batman", "BatEmail", "BatPicture"))
-            .enqueue(object : Callback<ResponseBody> {
-                override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
-                    Toast.makeText(this@EventDetailActivity, getString(R.string.error_check_in), Toast.LENGTH_LONG).show()
-                    t.printStackTrace()
-                }
+        val user = SharedPrefsUtil(this).getPerson()
+        user?.eventId = event.id
 
-                override fun onResponse(call: Call<ResponseBody>,response: Response<ResponseBody>) {
-                    Toast.makeText(this@EventDetailActivity,getString(R.string.success_check_in),Toast.LENGTH_LONG).show()
-                }
-            })
+        user?.eventId?.let {
+            RetrofitInitializer()
+                .eventsService()
+                .checkIn(user)
+                .enqueue(object : Callback<ResponseBody> {
+                    override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
+                        Toast.makeText(this@EventDetailActivity, getString(R.string.error_check_in), Toast.LENGTH_LONG).show()
+                        t.printStackTrace()
+                    }
+
+                    override fun onResponse(call: Call<ResponseBody>,response: Response<ResponseBody>) {
+                        Toast.makeText(this@EventDetailActivity,getString(R.string.success_check_in) + ", " + user.name, Toast.LENGTH_LONG).show()
+                    }
+                })
+        }
     }
 
     private fun configureMapIfPermitted() {

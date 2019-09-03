@@ -1,4 +1,4 @@
-package tech.pucci.checkthis
+package tech.pucci.checkthis.util
 
 import java.text.SimpleDateFormat
 import java.util.*

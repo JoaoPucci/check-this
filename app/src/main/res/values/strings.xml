@@ -6,11 +6,21 @@
     <string name="google_android_map_api_key">AIzaSyDSOcc84nWn1gy-fucEa-z2jSegICFiXC0</string>
     <string name="event_detail_label_people">Who\'s checking</string>
     <string name="error_check_in">Error Checking In, try again later</string>
-    <string name="success_check_in">You are checking it!</string>
+    <string name="success_check_in">You are checking it</string>
     <string name="check_in_dialog_cancel">Cancel</string>
     <string name="check_in_dialog_title">Check this event?</string>
     <string name="check_in_dialog_positive">Check It!</string>
     <string name="error_loading_event_list">Error loading items :(\nSwipe down to retry</string>
     <string name="event_list_error_loading_content_desc">Refresh icon</string>
     <string name="event_list_no_events">There are no events for you</string>
+    <string name="user_name_hint">name</string>
+    <string name="user_email_hint">e-mail</string>
+    <string name="button_user_login">Log In</string>
+    <string name="login_text">Login to check the best events</string>
+    <string name="login_logo_content_desc">Calendar image</string>
+    <string name="prefs_user" translatable="false">prefs_user</string>
+    <string name="prefs_user_person">prefs_user_person</string>
+    <string name="login_error">Login error</string>
+    <string name="mandatory_field">Field is mandatory</string>
+    <string name="email_invalid">e-mail invalid</string>
 </resources>

@@ -1,7 +1,7 @@
 package tech.pucci.checkthis.model
 
 import com.google.gson.Gson
-import tech.pucci.checkthis.DateUtils
+import tech.pucci.checkthis.util.DateUtils
 
 data class Event(
             val people: List<Person>,

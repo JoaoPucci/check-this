@@ -16,18 +16,20 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <meta-data
-            android:name="com.google.android.geo.API_KEY"
-            android:value="@string/google_android_map_api_key" />
-
-        <activity android:name=".ui.activity.EventDetailActivity" />
-        <activity android:name=".ui.activity.EventsActivity">
+        <activity android:name=".ui.activity.UserActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/google_android_map_api_key" />
+
+        <activity android:name=".ui.activity.EventDetailActivity" />
+        <activity android:name=".ui.activity.EventsActivity" />
     </application>
 
 </manifest>
