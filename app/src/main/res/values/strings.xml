@@ -10,4 +10,5 @@
     <string name="check_in_dialog_cancel">Cancel</string>
     <string name="check_in_dialog_title">Check this event?</string>
     <string name="check_in_dialog_positive">Check It!</string>
+    <string name="error_request_events">Error receiving events</string>
 </resources>

@@ -30,7 +30,7 @@ class EventsActivity : AppCompatActivity() {
     private fun requestEvents() {
         RetrofitInitializer().eventsService().get().enqueue(object : Callback<List<Event>?> {
             override fun onFailure(call: Call<List<Event>?>, t: Throwable) {
-                Toast.makeText(this@EventsActivity, "Error receiving events", Toast.LENGTH_LONG)
+                Toast.makeText(this@EventsActivity, getString(R.string.error_request_events), Toast.LENGTH_LONG)
                     .show()
                 t.printStackTrace()
             }

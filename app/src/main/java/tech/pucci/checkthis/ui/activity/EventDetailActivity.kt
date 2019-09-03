@@ -69,7 +69,7 @@ class EventDetailActivity : AppCompatActivity() {
                 .setPositiveButton(getString(R.string.check_in_dialog_positive)) { _, _ ->
                     RetrofitInitializer()
                         .eventsService()
-                        .checkIn(Person(event.id, "Batman", "BatEmail", "BatPicture"))
+                        .checkIn(Person("100", event.id, "Batman", "BatEmail", "BatPicture"))
                         .enqueue(object : retrofit2.Callback<ResponseBody> {
                             override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
                                 Toast.makeText(

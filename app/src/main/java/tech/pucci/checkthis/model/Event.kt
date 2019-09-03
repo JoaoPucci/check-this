@@ -2,7 +2,8 @@ package tech.pucci.checkthis.model
 
 import com.google.gson.Gson
 
-class Event(val people: List<Person>,
+data class Event(
+            val people: List<Person>,
             val date: Long,
             val description: String,
             val image: String,
