@@ -22,5 +22,5 @@
     <string name="prefs_user_person">prefs_user_person</string>
     <string name="login_error">Login error</string>
     <string name="mandatory_field">Field is mandatory</string>
-    <string name="email_invalid">e-mail invalid</string>
+    <string name="email_invalid">Invalid e-mail</string>
 </resources>
