@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
@@ -12,10 +11,10 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import tech.pucci.checkthis.ui.adapter.EventsAdapter
 import tech.pucci.checkthis.R
-import tech.pucci.checkthis.network.RetrofitInitializer
 import tech.pucci.checkthis.model.Event
+import tech.pucci.checkthis.network.RetrofitInitializer
+import tech.pucci.checkthis.ui.adapter.EventsAdapter
 
 class EventsActivity : AppCompatActivity() {
 

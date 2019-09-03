@@ -21,6 +21,7 @@
         app:maxImageSize="45dp" />
 
     <ScrollView
+        android:id="@+id/scroll_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <LinearLayout
@@ -82,7 +83,6 @@
 
                 </LinearLayout>
 
-
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
@@ -120,6 +120,7 @@
                             android:text="@string/event_detail_label_location"
                             android:textSize="12sp"
                             android:textColor="@color/white" />
+
                     </LinearLayout>
 
                     <com.google.android.gms.maps.MapView
@@ -159,7 +160,11 @@
                         tools:listitem="@layout/list_item_person" />
 
                 </LinearLayout>
+
             </androidx.cardview.widget.CardView>
+
         </LinearLayout>
+
     </ScrollView>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -54,6 +54,9 @@ class EventDetailActivity : AppCompatActivity() {
         tvAddress = findViewById(R.id.event_detail_address)
         fabCheckThis = findViewById(R.id.event_detail_check)
 
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setDisplayShowHomeEnabled(true)
+
         val eventJsonString: String? = intent.getStringExtra(Event.EXTRA_EVENT)
         event = Gson().fromJson<Event>(eventJsonString, Event::class.java)
 
@@ -63,13 +66,18 @@ class EventDetailActivity : AppCompatActivity() {
         mvMap.onCreate(Bundle())
     }
 
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return true
+    }
+
     private fun configureFab() {
         fabCheckThis.setOnClickListener {
             AlertDialog.Builder(this).setTitle(getString(R.string.check_in_dialog_title))
                 .setPositiveButton(getString(R.string.check_in_dialog_positive)) { _, _ ->
                     RetrofitInitializer()
                         .eventsService()
-                        .checkIn(Person("100", event.id, "Batman", "BatEmail", "BatPicture"))
+                        .checkIn(Person("", event.id, "Batman", "BatEmail", "BatPicture"))
                         .enqueue(object : retrofit2.Callback<ResponseBody> {
                             override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
                                 Toast.makeText(
